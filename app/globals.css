@@ -14,6 +14,7 @@
   --sand-dim: #847c6d; /* muted labels (≈4.6:1, AA) */
   --bright: #efefef; /* near-white — hi-emphasis / hover */
   --ember: #eb5939; /* red-orange — the one bold accent (≈4.6:1) */
+  --ash: #4d4d4d; /* neutral dim grey — the reference's corner control label */
 
   --nav-h: 4.5rem;
 }
@@ -28,6 +29,7 @@
   --color-foreground: var(--sand); /* headings + primary text */
   --color-bright: var(--bright); /* hover / hi-emphasis / reveal text */
   --color-muted: var(--sand-dim); /* small secondary labels */
+  --color-faint: var(--ash); /* faint corner control (bottom-right CTA), matches ref */
   --color-subtle: var(--sand-2); /* body copy */
   --color-border: color-mix(in oklab, var(--sand), transparent 88%);
   --color-border-strong: color-mix(in oklab, var(--sand), transparent 80%);

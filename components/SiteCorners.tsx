@@ -24,6 +24,11 @@ const ICONS: Record<string, string> = {
 export default function SiteCorners() {
   const { contact, hero } = content;
 
+  // Two-tone CTA like the reference's "Sound On" control: first word dim grey,
+  // the rest tan.
+  const [ctaLead, ...ctaRestWords] = hero.primaryCta.label.split(" ");
+  const ctaRest = ctaRestWords.join(" ");
+
   return (
     <>
       {/* Bottom-left — social icons */}
@@ -55,14 +60,21 @@ export default function SiteCorners() {
       </ul>
 
       {/* Bottom-right — vertical "Let's talk" (in place of the reference's sound toggle).
-          text-orientation:sideways rotates every glyph (incl. the apostrophe) uniformly. */}
+          Colours match that control: dim grey at rest → tan on hover. text-orientation:
+          sideways rotates every glyph uniformly; rotate-180 turns the vertical-rl rotate(90°)
+          into rotate(270°) ≡ rotate(-90°) so it reads bottom-to-top like the reference. */}
       <div className="fixed bottom-6 right-6 z-40 hidden md:block">
         <ExternalLink
           href={hero.primaryCta.href}
           data-cursor
-          className="block text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-foreground)] transition-colors duration-200 [writing-mode:vertical-rl] [text-orientation:sideways] hover:text-[var(--color-bright)]"
+          className="group block rotate-180 text-sm font-bold uppercase tracking-[0.2em] [writing-mode:vertical-rl] [text-orientation:sideways]"
         >
-          {hero.primaryCta.label}
+          <span className="text-[var(--color-faint)] transition-colors duration-200 group-hover:text-[var(--color-foreground)]">
+            {ctaLead}
+          </span>
+          {ctaRest ? (
+            <span className="text-[var(--color-foreground)]"> {ctaRest}</span>
+          ) : null}
         </ExternalLink>
       </div>
     </>
