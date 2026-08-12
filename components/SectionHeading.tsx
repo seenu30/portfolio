@@ -11,7 +11,7 @@ export default function SectionHeading({
   className?: string;
 }) {
   return (
-    <Reveal className={`max-w-3xl ${className}`}>
+    <Reveal className={`mx-auto max-w-2xl ${className}`}>
       <p className="text-sm font-bold uppercase tracking-[0.5em] text-[var(--color-foreground)]">
         {kicker}
       </p>

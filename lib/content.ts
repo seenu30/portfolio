@@ -46,8 +46,8 @@ const EMAIL = "team@marketink.com";
 const PHONE = "+1 (555) 012-3456";
 
 const NAV_LINKS: NavLink[] = [
+  { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
-  { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
 // Big hero statement — two-ish words emphasized (rendered in the accent).

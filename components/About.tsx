@@ -9,8 +9,8 @@ export default function About() {
   const { about } = content;
 
   return (
-    <section id="about" data-cursor="expand" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-4xl px-5 sm:px-8">
+    <section id="about" className="relative py-24 sm:py-32">
+      <div className="mx-auto max-w-2xl px-5 sm:px-8">
         <Reveal>
           <p className="text-sm font-bold uppercase tracking-[0.5em] text-[var(--color-foreground)]">
             {about.kicker}

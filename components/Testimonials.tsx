@@ -25,8 +25,8 @@ export default function Testimonials() {
   };
 
   return (
-    <section data-cursor="expand" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-4xl px-5 sm:px-8">
+    <section className="relative py-24 sm:py-32">
+      <div className="mx-auto max-w-2xl px-5 sm:px-8">
         <SectionHeading kicker={testimonials.kicker} title={testimonials.title} />
 
         <div

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { content } from "@/lib/content";
 import Logo from "./Logo";
+import Magnetic from "./Magnetic";
 import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
@@ -14,16 +15,18 @@ export default function Navbar() {
     <>
       <header className="nav-enter fixed inset-x-0 top-0 z-50">
         <nav aria-label="Primary" className="bg-transparent">
-          <div className="mx-auto flex max-w-6xl items-start justify-between px-5 pt-6 sm:px-8">
-            {/* Logo mark */}
-            <a
-              href="#top"
-              aria-label={copy.brand}
-              data-cursor
-              className="block text-[var(--color-foreground)] transition-colors duration-200 hover:text-[var(--color-accent-2)]"
-            >
-              <Logo />
-            </a>
+          <div className="flex w-full items-start justify-between px-6 pt-6">
+            {/* Logo mark — magnetic pull; a tan circle fills behind it on hover, icon inverts */}
+            <Magnetic strength={0.55}>
+              <a
+                href="#top"
+                aria-label={copy.brand}
+                data-cursor
+                className="group grid place-items-center rounded-full p-2 text-[var(--color-foreground)] transition-colors duration-300 hover:bg-[var(--color-accent-2)] hover:text-[var(--color-on-accent-2)]"
+              >
+                <Logo className="h-[18px] w-[18px]" />
+              </a>
+            </Magnetic>
 
             {/* Right group — links pushed right (logo pins left), then mobile toggle */}
             <div className="flex flex-col items-end gap-2">

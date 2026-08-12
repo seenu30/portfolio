@@ -14,7 +14,7 @@ const STATES: Record<
   CursorState,
   { size: number; opacity: number; label?: string }
 > = {
-  idle: { size: 10, opacity: 1 },
+  idle: { size: 14, opacity: 1 },
   contract: { size: 6, opacity: 1 },
   expand: { size: 120, opacity: 1 },
   view: { size: 72, opacity: 1, label: "View" },

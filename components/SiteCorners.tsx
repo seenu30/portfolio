@@ -1,6 +1,7 @@
 import { siDribbble, siYoutube, siInstagram } from "simple-icons";
 import { content } from "@/lib/content";
 import ExternalLink from "./ExternalLink";
+import Magnetic from "./Magnetic";
 
 // LinkedIn was dropped from simple-icons (trademark), so carry its glyph inline.
 const LINKEDIN_PATH =
@@ -26,37 +27,40 @@ export default function SiteCorners() {
   return (
     <>
       {/* Bottom-left — social icons */}
-      <ul className="fixed bottom-5 left-5 z-40 hidden flex-col items-start gap-4 md:flex">
+      <ul className="fixed bottom-6 left-6 z-40 hidden flex-col items-start gap-1 md:flex">
         {contact.socials.map((s) => {
           const iconPath = ICONS[s.label.toLowerCase()];
           if (!iconPath) return null;
           return (
             <li key={s.label}>
-              <ExternalLink
-                href={s.href}
-                data-cursor
-                aria-label={s.label}
-                className="block text-[var(--color-foreground)] transition-colors duration-200 hover:text-[var(--color-accent-2)]"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="h-[18px] w-[18px] fill-current"
+              <Magnetic strength={0.55}>
+                <ExternalLink
+                  href={s.href}
+                  data-cursor
+                  aria-label={s.label}
+                  className="group grid place-items-center rounded-full p-2.5 text-[var(--color-foreground)] transition-colors duration-300 hover:bg-[var(--color-accent-2)] hover:text-[var(--color-on-accent-2)]"
                 >
-                  <path d={iconPath} />
-                </svg>
-              </ExternalLink>
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    className="h-[18px] w-[18px] fill-current"
+                  >
+                    <path d={iconPath} />
+                  </svg>
+                </ExternalLink>
+              </Magnetic>
             </li>
           );
         })}
       </ul>
 
-      {/* Bottom-right — vertical "Let's talk" (in place of the reference's sound toggle) */}
-      <div className="fixed bottom-5 right-5 z-40 hidden md:block">
+      {/* Bottom-right — vertical "Let's talk" (in place of the reference's sound toggle).
+          text-orientation:sideways rotates every glyph (incl. the apostrophe) uniformly. */}
+      <div className="fixed bottom-6 right-6 z-40 hidden md:block">
         <ExternalLink
           href={hero.primaryCta.href}
           data-cursor
-          className="block text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-foreground)] transition-colors duration-200 [writing-mode:vertical-rl] hover:text-[var(--color-accent-2)]"
+          className="block text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-foreground)] transition-colors duration-200 [writing-mode:vertical-rl] [text-orientation:sideways] hover:text-[var(--color-bright)]"
         >
           {hero.primaryCta.label}
         </ExternalLink>

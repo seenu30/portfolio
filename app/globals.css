@@ -158,12 +158,6 @@ body {
 /* Maximalist extras — cursor, orbs, rotating text ring                */
 /* ------------------------------------------------------------------ */
 
-/* Hide the native cursor only when the custom one is active. */
-.has-custom-cursor,
-.has-custom-cursor * {
-  cursor: none !important;
-}
-
 /* Hero "reveal" layer — a recoloured duplicate of the hero text, shown only inside
    a soft circle that follows (with lerp) the pointer. Vars --hero-x/y/r are set by JS. */
 .hero-reveal {
@@ -181,11 +175,6 @@ body {
   );
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-}
-
-/* While the pointer is over the hero, hide the global cursor so there's one circle. */
-html.in-hero .custom-cursor-root {
-  opacity: 0;
 }
 
 /* Soft decorative gradient blob. */

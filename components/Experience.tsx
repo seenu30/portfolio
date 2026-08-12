@@ -8,14 +8,14 @@ export default function Experience() {
   const { experience } = content;
 
   return (
-    <section id="experience" data-cursor="expand" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-4xl px-5 sm:px-8">
+    <section id="experience" className="relative py-24 sm:py-32">
+      <div className="mx-auto max-w-2xl px-5 sm:px-8">
         <SectionHeading kicker={experience.kicker} title={experience.title} />
 
-        <p className="mt-14 text-sm font-bold uppercase tracking-[0.5em] text-[var(--color-foreground)]">
+        <p className="mx-auto mt-14 max-w-2xl text-sm font-bold uppercase tracking-[0.5em] text-[var(--color-foreground)]">
           History
         </p>
-        <ol className="mt-6 border-l border-[var(--color-border-strong)] pl-6 sm:pl-10">
+        <ol className="mx-auto mt-6 max-w-2xl border-l border-[var(--color-border-strong)] pl-6 sm:pl-10">
           {experience.jobs.map((job, i) => (
             <Reveal key={`${job.year}-${job.role}`} delay={i * 0.05}>
               <li
