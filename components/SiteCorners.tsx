@@ -32,18 +32,18 @@ export default function SiteCorners() {
   return (
     <>
       {/* Bottom-left — social icons */}
-      <ul className="fixed bottom-6 left-6 z-40 hidden flex-col items-start gap-1 md:flex">
+      <ul className="fixed bottom-6 left-6 z-40 hidden flex-col items-start gap-6 md:flex">
         {contact.socials.map((s) => {
           const iconPath = ICONS[s.label.toLowerCase()];
           if (!iconPath) return null;
           return (
             <li key={s.label}>
-              <Magnetic strength={0.55}>
+              <Magnetic strength={0.55} radius={30}>
                 <ExternalLink
                   href={s.href}
                   data-cursor
                   aria-label={s.label}
-                  className="group grid place-items-center rounded-full p-2.5 text-[var(--color-foreground)] transition-colors duration-300 hover:bg-[var(--color-accent-2)] hover:text-[var(--color-on-accent-2)]"
+                  className="grid place-items-center rounded-full p-2.5 text-[var(--color-foreground)] transition-colors duration-300 group-data-[active=true]/mag:bg-[var(--color-accent-2)] group-data-[active=true]/mag:text-[var(--color-on-accent-2)]"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -69,12 +69,25 @@ export default function SiteCorners() {
           data-cursor
           className="group block rotate-180 text-sm font-bold uppercase tracking-[0.2em] [writing-mode:vertical-rl] [text-orientation:sideways]"
         >
-          <span className="text-[var(--color-faint)] transition-colors duration-200 group-hover:text-[var(--color-foreground)]">
-            {ctaLead}
+          {/* Horizontal roll on hover: the copy that rolls in swaps the two words'
+              colours — the lead takes "talk"'s tan and "talk" takes the lead's grey. */}
+          <span className="relative block overflow-hidden">
+            <span className="block transition-transform duration-300 ease-out group-hover:-translate-x-full">
+              <span className="text-[var(--color-faint)]">{ctaLead}</span>
+              {ctaRest ? (
+                <span className="text-[var(--color-foreground)]"> {ctaRest}</span>
+              ) : null}
+            </span>
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 block translate-x-full transition-transform duration-300 ease-out group-hover:translate-x-0"
+            >
+              <span className="text-[var(--color-foreground)]">{ctaLead}</span>
+              {ctaRest ? (
+                <span className="text-[var(--color-faint)]"> {ctaRest}</span>
+              ) : null}
+            </span>
           </span>
-          {ctaRest ? (
-            <span className="text-[var(--color-foreground)]"> {ctaRest}</span>
-          ) : null}
         </ExternalLink>
       </div>
     </>

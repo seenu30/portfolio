@@ -52,12 +52,12 @@ export default function Navbar() {
         <nav aria-label="Primary" className="bg-transparent">
           <div className="flex w-full items-start justify-between px-6 pt-6">
             {/* Logo mark — magnetic pull; a tan circle fills behind it on hover, icon inverts */}
-            <Magnetic strength={0.55}>
+            <Magnetic strength={0.55} radius={130}>
               <a
                 href="#top"
                 aria-label={copy.brand}
                 data-cursor
-                className="group grid place-items-center rounded-full p-2 text-[var(--color-foreground)] transition-colors duration-300 hover:bg-[var(--color-accent-2)] hover:text-[var(--color-on-accent-2)]"
+                className="grid place-items-center rounded-full p-2 text-[var(--color-foreground)] transition-colors duration-300 group-data-[active=true]/mag:bg-[var(--color-accent-2)] group-data-[active=true]/mag:text-[var(--color-on-accent-2)]"
               >
                 <Logo className="h-[18px] w-[18px]" />
               </a>
