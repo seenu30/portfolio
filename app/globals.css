@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Design tokens (blend of Sevora off-white + Naka clean sans)         */
+/* ------------------------------------------------------------------ */
+@theme inline {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-lora), Lora, Georgia, serif;
+
+  --color-background: #faf9f7; /* warm off-white */
+  --color-surface: #ffffff;
+  --color-foreground: #0d0d10; /* near-black */
+  --color-muted: #8b8b93; /* two-tone grey / secondary text */
+  --color-subtle: #55555c; /* body copy */
+  --color-border: rgba(13, 13, 16, 0.08);
+  --color-border-strong: rgba(13, 13, 16, 0.14);
+  --color-accent: #0d0d10; /* dark pill CTA */
+  --color-accent-2: #3b46ff; /* electric cobalt — the one bold accent */
+}
+
+:root {
+  --nav-h: 4.5rem;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ------------------------------------------------------------------ */
+/* Marquee — pure CSS, GPU-composited, duplicated track                */
+/* ------------------------------------------------------------------ */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* track is duplicated 2x; shift by exactly half to loop seamlessly */
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 32s) linear infinite;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+/* ------------------------------------------------------------------ */
+/* Entrance reveals — pure CSS so text is never gated behind JS.        */
+/* Resting state is fully visible; the keyframe only plays the intro,   */
+/* so no-JS / slow hydration still shows everything (LCP-safe).         */
+/* ------------------------------------------------------------------ */
+@keyframes letter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-letter {
+  display: inline-block;
+  opacity: 1; /* resting state visible */
+  will-change: transform, opacity;
+  animation: letter-rise 0.62s cubic-bezier(0.2, 0.65, 0.3, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+
+.reveal-up {
+  opacity: 1;
+  animation: reveal-up 0.7s cubic-bezier(0.2, 0.65, 0.3, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes nav-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.nav-enter {
+  animation: nav-drop 0.6s cubic-bezier(0.2, 0.65, 0.3, 1) both;
+}
+
+/* ------------------------------------------------------------------ */
+/* Maximalist extras — cursor, orbs, rotating text ring                */
+/* ------------------------------------------------------------------ */
+
+/* Hide the native cursor only when the custom one is active. */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* Hero "reveal" layer — a recoloured duplicate of the hero text, shown only inside
+   a soft circle that follows (with lerp) the pointer. Vars --hero-x/y/r are set by JS. */
+.hero-reveal {
+  background: var(--color-accent-2);
+  -webkit-mask-image: radial-gradient(
+    circle var(--hero-r, 0px) at var(--hero-x, 50%) var(--hero-y, 50%),
+    #000 55%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(
+    circle var(--hero-r, 0px) at var(--hero-x, 50%) var(--hero-y, 50%),
+    #000 55%,
+    transparent 72%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* While the pointer is over the hero, hide the global cursor so there's one circle. */
+html.in-hero .custom-cursor-root {
+  opacity: 0;
+}
+
+/* Soft decorative gradient blob. */
+.orb {
+  border-radius: 9999px;
+  filter: blur(56px);
+  background: radial-gradient(
+    circle at 30% 30%,
+    color-mix(in oklab, var(--color-accent-2), white 20%),
+    color-mix(in oklab, var(--color-accent-2), transparent 55%) 55%,
+    transparent 72%
+  );
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.text-ring {
+  animation: spin-slow 24s linear infinite;
+}
+
+/* Big-type flourish for oversized display headings. */
+.display {
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion — degrade every animation to its final state         */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee__track {
+    animation: none;
+    /* still show the row, just static */
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
