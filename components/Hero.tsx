@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useEffect, useRef } from "react";
+import { type CSSProperties, type Ref, useEffect, useRef } from "react";
 import { content } from "@/lib/content";
 import AnimatedText from "./AnimatedText";
 import HoverButton from "./HoverButton";
@@ -18,9 +18,20 @@ type HeroCopy = typeof content.hero;
  * name statically (no per-letter animation) as a <div> so it aligns pixel-for-
  * pixel with the base and adds no second <h1>.
  */
-function HeroInner({ hero, reveal = false }: { hero: HeroCopy; reveal?: boolean }) {
+function HeroInner({
+  hero,
+  reveal = false,
+  innerRef,
+}: {
+  hero: HeroCopy;
+  reveal?: boolean;
+  innerRef?: Ref<HTMLDivElement>;
+}) {
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-5 text-center sm:px-8">
+    <div
+      ref={innerRef}
+      className="mx-auto flex w-full max-w-5xl flex-col items-center px-5 text-center sm:px-8"
+    >
       {/* Badge */}
       <div
         className="reveal-up inline-flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-1.5 text-sm text-[var(--color-subtle)]"
@@ -100,20 +111,21 @@ function HeroInner({ hero, reveal = false }: { hero: HeroCopy; reveal?: boolean 
 
 export default function Hero() {
   const { hero } = content;
-  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const revealRef = useRef<HTMLDivElement>(null);
 
   // Smooth "reveal" circle: lerp the mask's centre + radius toward the pointer
-  // every frame (this easing — not a spring — is what makes it glide). Fine
-  // pointers only; disabled under reduced motion.
+  // every frame (this easing — not a spring — is what makes it glide). The circle
+  // only grows while the pointer is over the CONTENT block, not the whole section.
+  // Fine pointers only; disabled under reduced motion.
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!fine || reduce) return;
 
-    const section = sectionRef.current;
+    const target = contentRef.current;
     const layer = revealRef.current;
-    if (!section || !layer) return;
+    if (!target || !layer) return;
 
     let raf = 0;
     let tx = 0,
@@ -144,9 +156,9 @@ export default function Hero() {
       document.documentElement.classList.remove("in-hero");
     };
 
-    section.addEventListener("pointermove", onMove);
-    section.addEventListener("pointerenter", onEnter);
-    section.addEventListener("pointerleave", onLeave);
+    target.addEventListener("pointermove", onMove);
+    target.addEventListener("pointerenter", onEnter);
+    target.addEventListener("pointerleave", onLeave);
 
     const tick = () => {
       cx += (tx - cx) * 0.16;
@@ -161,16 +173,15 @@ export default function Hero() {
 
     return () => {
       cancelAnimationFrame(raf);
-      section.removeEventListener("pointermove", onMove);
-      section.removeEventListener("pointerenter", onEnter);
-      section.removeEventListener("pointerleave", onLeave);
+      target.removeEventListener("pointermove", onMove);
+      target.removeEventListener("pointerenter", onEnter);
+      target.removeEventListener("pointerleave", onLeave);
       document.documentElement.classList.remove("in-hero");
     };
   }, []);
 
   return (
     <section
-      ref={sectionRef}
       id="top"
       className="relative flex min-h-screen flex-col justify-center overflow-hidden pt-[calc(var(--nav-h)+2rem)] pb-20"
     >
@@ -183,7 +194,7 @@ export default function Hero() {
       </Parallax>
 
       {/* Base content */}
-      <HeroInner hero={hero} />
+      <HeroInner hero={hero} innerRef={contentRef} />
 
       {/* Recoloured reveal, shown only inside the cursor mask (see .hero-reveal) */}
       <div
