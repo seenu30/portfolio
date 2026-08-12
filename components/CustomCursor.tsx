@@ -27,8 +27,8 @@ const CLASS: Record<CursorState, string> = {
   idle: "bg-[var(--color-accent-2)] text-transparent",
   contract: "bg-[var(--color-accent-2)] text-transparent",
   expand: "bg-[var(--color-accent-2)] text-transparent",
-  view: "bg-[var(--color-accent-2)] text-white",
-  drag: "bg-[var(--color-accent-2)] text-white",
+  view: "bg-[var(--color-accent-2)] text-[var(--color-on-accent-2)]",
+  drag: "bg-[var(--color-accent-2)] text-[var(--color-on-accent-2)]",
 };
 
 /**

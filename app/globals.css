@@ -3,23 +3,39 @@
 /* ------------------------------------------------------------------ */
 /* Design tokens (blend of Sevora off-white + Naka clean sans)         */
 /* ------------------------------------------------------------------ */
+:root {
+  /* ── palette primitives — EDIT HERE to retheme the whole site ──────────
+     Every semantic token below derives from these. Change a value here and
+     it cascades everywhere (badges, cursor, borders, hovers, reveal, orb…). */
+  --paper: #0d0d0d; /* near-black base */
+  --paper-2: #17140f; /* raised warm-dark surface */
+  --sand: #b7ab98; /* warm tan — primary text (≈9.3:1 on paper) */
+  --sand-2: #9a8f7d; /* body copy (≈6.7:1, AA) */
+  --sand-dim: #847c6d; /* muted labels (≈4.6:1, AA) */
+  --bright: #efefef; /* near-white — hi-emphasis / hover */
+  --ember: #eb5939; /* red-orange — the one bold accent (≈4.6:1) */
+
+  --nav-h: 4.5rem;
+}
+
 @theme inline {
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-lora), Lora, Georgia, serif;
 
-  --color-background: #faf9f7; /* warm off-white */
-  --color-surface: #ffffff;
-  --color-foreground: #0d0d10; /* near-black */
-  --color-muted: #8b8b93; /* two-tone grey / secondary text */
-  --color-subtle: #55555c; /* body copy */
-  --color-border: rgba(13, 13, 16, 0.08);
-  --color-border-strong: rgba(13, 13, 16, 0.14);
-  --color-accent: #0d0d10; /* dark pill CTA */
-  --color-accent-2: #3b46ff; /* electric cobalt — the one bold accent */
-}
-
-:root {
-  --nav-h: 4.5rem;
+  /* ── semantic tokens — reference the primitives above, never raw hex ── */
+  --color-background: var(--paper);
+  --color-surface: var(--paper-2); /* lifted dark for cards / hover chips */
+  --color-foreground: var(--sand); /* headings + primary text */
+  --color-bright: var(--bright); /* hover / hi-emphasis / reveal text */
+  --color-muted: var(--sand-dim); /* small secondary labels */
+  --color-subtle: var(--sand-2); /* body copy */
+  --color-border: color-mix(in oklab, var(--sand), transparent 88%);
+  --color-border-strong: color-mix(in oklab, var(--sand), transparent 80%);
+  --color-accent: var(--bright); /* light pill CTA fill on black */
+  --color-accent-2: var(--ember); /* the one bold accent */
+  --color-on-accent: var(--paper); /* near-black text on the light pill */
+  --color-on-accent-2: var(--paper); /* near-black text on ember */
+  --color-ring: var(--ember); /* on-brand focus ring, visible on dark */
 }
 
 * {
@@ -29,6 +45,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* dark canvas from the very first paint, before body styles resolve */
+  background: var(--color-background);
 }
 
 body {
@@ -150,15 +168,16 @@ body {
    a soft circle that follows (with lerp) the pointer. Vars --hero-x/y/r are set by JS. */
 .hero-reveal {
   background: var(--color-accent-2);
+  /* solid, hard-edged circle (no soft gradient falloff) */
   -webkit-mask-image: radial-gradient(
     circle var(--hero-r, 0px) at var(--hero-x, 50%) var(--hero-y, 50%),
-    #000 55%,
-    transparent 72%
+    #000 100%,
+    transparent 100%
   );
   mask-image: radial-gradient(
     circle var(--hero-r, 0px) at var(--hero-x, 50%) var(--hero-y, 50%),
-    #000 55%,
-    transparent 72%
+    #000 100%,
+    transparent 100%
   );
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
@@ -175,8 +194,8 @@ html.in-hero .custom-cursor-root {
   filter: blur(56px);
   background: radial-gradient(
     circle at 30% 30%,
-    color-mix(in oklab, var(--color-accent-2), white 20%),
-    color-mix(in oklab, var(--color-accent-2), transparent 55%) 55%,
+    color-mix(in oklab, var(--color-accent-2), transparent 30%),
+    color-mix(in oklab, var(--color-accent-2), transparent 60%) 55%,
     transparent 72%
   );
 }

@@ -36,7 +36,7 @@ export default function Testimonials() {
           data-cursor="drag"
           tabIndex={0}
           onKeyDown={onKeyDown}
-          className="mt-14 min-h-[13rem] rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-foreground)] sm:min-h-[11rem]"
+          className="mt-14 min-h-[13rem] rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] sm:min-h-[11rem]"
         >
           <AnimatePresence mode="wait">
             <motion.blockquote
@@ -52,7 +52,7 @@ export default function Testimonials() {
               <footer className="mt-6 flex items-center gap-3">
                 <span
                   aria-hidden="true"
-                  className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-accent-2)] text-sm font-semibold text-white"
+                  className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-accent-2)] text-sm font-semibold text-[var(--color-on-accent-2)]"
                 >
                   {t.name.charAt(0)}
                 </span>
@@ -74,7 +74,7 @@ export default function Testimonials() {
             onClick={() => go(-1)}
             aria-label="Previous testimonial"
             data-cursor
-            className="grid h-11 w-11 place-items-center rounded-full border border-[var(--color-border-strong)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-foreground)]"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[var(--color-border-strong)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]"
           >
             ←
           </button>
@@ -83,7 +83,7 @@ export default function Testimonials() {
             onClick={() => go(1)}
             aria-label="Next testimonial"
             data-cursor
-            className="grid h-11 w-11 place-items-center rounded-full border border-[var(--color-border-strong)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-foreground)]"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[var(--color-border-strong)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]"
           >
             →
           </button>

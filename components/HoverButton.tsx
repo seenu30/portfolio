@@ -12,11 +12,11 @@ type Props = {
 const base =
   "group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium " +
   "transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 " +
-  "focus-visible:ring-[var(--color-foreground)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]";
+  "focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-accent)] text-white hover:bg-[color-mix(in_oklab,var(--color-accent),white_14%)]",
+    "bg-[var(--color-accent)] text-[var(--color-on-accent)] hover:bg-[color-mix(in_oklab,var(--color-accent),var(--color-accent-2)_12%)]",
   outline:
     "border border-[var(--color-border-strong)] text-[var(--color-foreground)] hover:border-[var(--color-foreground)]",
   ghost:

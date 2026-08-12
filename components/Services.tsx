@@ -43,12 +43,12 @@ export default function Services() {
             <Reveal key={item.label} delay={i * 0.05}>
               <div
                 data-cursor
-                className="group grid grid-cols-1 gap-3 border-b border-[var(--color-border)] py-8 transition-colors duration-300 sm:grid-cols-[7rem_1fr_auto] sm:items-baseline sm:gap-8 sm:rounded-2xl sm:px-4 sm:hover:bg-[var(--color-foreground)]"
+                className="group grid grid-cols-1 gap-3 border-b border-[var(--color-border)] py-8 transition-colors duration-300 sm:grid-cols-[7rem_1fr_auto] sm:items-baseline sm:gap-8 sm:rounded-2xl sm:px-4 sm:hover:bg-[var(--color-surface)]"
               >
-                <h3 className="text-2xl font-semibold tracking-tight text-[var(--color-foreground)] transition-[color,transform] duration-300 sm:group-hover:translate-x-2 sm:group-hover:text-[var(--color-background)]">
+                <h3 className="text-2xl font-semibold tracking-tight text-[var(--color-foreground)] transition-[color,transform] duration-300 sm:group-hover:translate-x-2 sm:group-hover:text-[var(--color-bright)]">
                   {item.label}
                 </h3>
-                <p className="max-w-xl text-[var(--color-subtle)] transition-colors duration-300 sm:group-hover:text-[var(--color-background)]">
+                <p className="max-w-xl text-[var(--color-subtle)] transition-colors duration-300 sm:group-hover:text-[var(--color-bright)]">
                   {item.desc}
                 </p>
                 <span className="hidden text-sm tabular-nums text-[var(--color-muted)] transition-colors duration-300 sm:block sm:group-hover:text-[var(--color-accent-2)]">

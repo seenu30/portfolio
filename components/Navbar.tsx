@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { content } from "@/lib/content";
-import HoverButton from "./HoverButton";
 import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
@@ -39,31 +38,32 @@ export default function Navbar() {
               {copy.brand}
             </a>
 
-            {/* Desktop links */}
-            <ul className="hidden items-center gap-9 md:flex">
-              {copy.nav.links.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    data-cursor
-                    className="text-sm text-[var(--color-subtle)] transition-colors hover:text-[var(--color-foreground)]"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            {/* Right cluster */}
-            <div className="flex items-center gap-3">
-              <div className="hidden md:block">
-                <HoverButton
-                  href={copy.hero.primaryCta.href}
-                  label={copy.hero.primaryCta.label}
-                  variant="primary"
-                  className="!px-5 !py-2.5"
-                />
-              </div>
+            {/* Right group — links pushed right (logo pins left), then mobile toggle */}
+            <div className="flex items-center gap-9">
+              {/* Desktop links with a roll-up duplicate-text hover */}
+              <ul className="hidden items-center gap-9 md:flex">
+                {copy.nav.links.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      data-cursor
+                      className="group relative block rounded-sm text-sm text-[var(--color-subtle)] transition-colors hover:text-[var(--color-bright)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]"
+                    >
+                      <span className="relative block h-[1.25em] overflow-hidden">
+                        <span className="block transition-transform duration-300 ease-out group-hover:-translate-y-full">
+                          {link.label}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 block translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0"
+                        >
+                          {link.label}
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
 
               {/* Mobile toggle — hamburger morphs to X */}
               <button
@@ -74,7 +74,7 @@ export default function Navbar() {
                 aria-controls="mobile-menu"
                 aria-label={open ? "Close menu" : "Open menu"}
                 data-cursor
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-strong)] text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-foreground)] md:hidden"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-strong)] text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] md:hidden"
               >
                 <span className="relative block h-4 w-5" aria-hidden="true">
                   <span
