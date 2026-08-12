@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { Fragment, type CSSProperties } from "react";
 import type { HeadlineSegment } from "@/lib/content";
 
 type Props = {
@@ -40,36 +40,39 @@ export default function AnimatedText({
       <span aria-hidden="true">
         {segments.map((segment, si) => {
           const words = segment.text.split(" ");
-          // Two-tone is colour only now — the whole headline shares one face.
+          // Two-tone is colour only — base tan, emphasized words in the accent.
           const toneClass = segment.emphasis
-            ? "text-[var(--color-foreground)]"
-            : "text-[var(--color-muted)]";
+            ? "text-[var(--color-accent-2)]"
+            : "text-[var(--color-foreground)]";
 
           return (
             <span key={si} className={toneClass}>
               {words.map((word, wi) => (
-                // keep each word unbreakable so letter-splitting never wraps mid-word
-                <span key={wi} className="inline-block whitespace-nowrap">
-                  {Array.from(word).map((char, ci) => {
-                    const delay = baseDelay + letterIndex * step;
-                    letterIndex += 1;
-                    return (
-                      <span
-                        key={ci}
-                        className={noAnimation ? "inline-block" : "hero-letter"}
-                        style={
-                          noAnimation
-                            ? undefined
-                            : ({ "--delay": `${delay}s` } as CSSProperties)
-                        }
-                      >
-                        {char}
-                      </span>
-                    );
-                  })}
-                  {/* trailing space after each word except the segment's last */}
+                <Fragment key={wi}>
+                  {/* keep each word unbreakable so letter-splitting never wraps mid-word */}
+                  <span className="inline-block whitespace-nowrap">
+                    {Array.from(word).map((char, ci) => {
+                      const delay = baseDelay + letterIndex * step;
+                      letterIndex += 1;
+                      return (
+                        <span
+                          key={ci}
+                          className={noAnimation ? "inline-block" : "hero-letter"}
+                          style={
+                            noAnimation
+                              ? undefined
+                              : ({ "--delay": `${delay}s` } as CSSProperties)
+                          }
+                        >
+                          {char}
+                        </span>
+                      );
+                    })}
+                  </span>
+                  {/* space after each word except the segment's last (outside the
+                      inline-block so it doesn't collapse) */}
                   {wi < words.length - 1 ? " " : ""}
-                </span>
+                </Fragment>
               ))}
               {/* space between segments */}
               {si < segments.length - 1 ? " " : ""}

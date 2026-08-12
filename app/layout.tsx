@@ -3,6 +3,7 @@ import { Geist, Lora } from "next/font/google";
 import { content } from "@/lib/content";
 import Preloader from "@/components/Preloader";
 import CustomCursor from "@/components/CustomCursor";
+import SiteCorners from "@/components/SiteCorners";
 import "./globals.css";
 
 // Base UI/body face.
@@ -48,6 +49,7 @@ export default function RootLayout({
         <Preloader />
         <CustomCursor />
         {children}
+        <SiteCorners />
       </body>
     </html>
   );

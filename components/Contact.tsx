@@ -16,7 +16,7 @@ export default function Contact() {
       data-cursor="expand"
       className="relative overflow-hidden border-t border-[var(--color-border)] py-24 sm:py-32"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-4xl px-5 sm:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-accent-2)]">

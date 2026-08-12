@@ -3,9 +3,6 @@
 import { type CSSProperties, type Ref, useEffect, useRef } from "react";
 import { content } from "@/lib/content";
 import AnimatedText from "./AnimatedText";
-import HoverButton from "./HoverButton";
-import StatCounter from "./StatCounter";
-import Magnetic from "./Magnetic";
 import Parallax from "./Parallax";
 
 const delay = (s: number) => ({ "--delay": `${s}s` }) as CSSProperties;
@@ -13,104 +10,51 @@ const delay = (s: number) => ({ "--delay": `${s}s` }) as CSSProperties;
 type HeroCopy = typeof content.hero;
 
 /**
- * The hero text block. Rendered twice: once as the real content, once (reveal)
- * as a recoloured duplicate shown through the cursor mask. `reveal` renders the
- * name statically (no per-letter animation) as a <div> so it aligns pixel-for-
- * pixel with the base and adds no second <h1>.
+ * The hero text block — a small eyebrow name + one oversized statement headline
+ * (two words in the accent). Rendered twice: once as the real content, once
+ * (reveal) as a recoloured duplicate shown through the cursor mask. `reveal`
+ * renders the headline statically (no per-letter animation) as a <div> so it
+ * aligns pixel-for-pixel with the base and adds no second <h1>.
  */
 function HeroInner({
   hero,
+  brand,
   reveal = false,
   innerRef,
 }: {
   hero: HeroCopy;
+  brand: string;
   reveal?: boolean;
   innerRef?: Ref<HTMLDivElement>;
 }) {
   return (
     <div
       ref={innerRef}
-      className="mx-auto flex w-full max-w-5xl flex-col items-center px-5 text-center sm:px-8"
+      className="mx-auto flex w-full max-w-2xl flex-col items-center px-5 text-center sm:px-8"
     >
-      {/* Badge */}
-      <div
-        className="reveal-up inline-flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-1.5 text-sm text-[var(--color-subtle)]"
+      {/* Eyebrow name */}
+      <p
+        className="reveal-up text-sm font-bold uppercase tracking-[0.5em] text-[var(--color-foreground)]"
         style={delay(0)}
       >
-        <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-2)] opacity-60" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent-2)]" />
-        </span>
-        {hero.badge}
-      </div>
+        {brand}
+      </p>
 
-      {/* Big name */}
+      {/* Big statement headline */}
       <AnimatedText
         segments={hero.headline}
         baseDelay={0.12}
         step={0.03}
         noAnimation={reveal}
         as={reveal ? "div" : "h1"}
-        className="display mt-6 text-7xl font-semibold sm:text-8xl lg:text-[9rem]"
+        className="display mt-6 text-6xl font-bold uppercase sm:text-8xl lg:text-[7rem]"
       />
-
-      {/* Tagline */}
-      <p
-        className="reveal-up mt-5 text-xl font-medium text-[var(--color-foreground)] sm:text-2xl"
-        style={delay(0.5)}
-      >
-        {hero.tagline}
-      </p>
-
-      {/* Intro */}
-      <p
-        className="reveal-up mt-4 max-w-xl text-pretty text-base leading-relaxed text-[var(--color-subtle)] sm:text-lg"
-        style={delay(0.62)}
-      >
-        {hero.intro}
-      </p>
-
-      {/* CTAs (magnetic) */}
-      <div
-        className="reveal-up mt-9 flex flex-col items-center gap-3 sm:flex-row"
-        style={delay(0.74)}
-      >
-        <Magnetic strength={0.45}>
-          <HoverButton
-            href={hero.primaryCta.href}
-            label={hero.primaryCta.label}
-            variant="primary"
-          />
-        </Magnetic>
-        <Magnetic strength={0.45}>
-          <HoverButton
-            href={hero.secondaryCta.href}
-            label={hero.secondaryCta.label}
-            variant="outline"
-          />
-        </Magnetic>
-      </div>
-
-      {/* Stats */}
-      <div
-        className="reveal-up mt-16 grid w-full max-w-lg grid-cols-3 gap-6"
-        style={delay(0.88)}
-      >
-        {hero.stats.map((stat) => (
-          <StatCounter
-            key={stat.label}
-            value={stat.value}
-            suffix={stat.suffix}
-            label={stat.label}
-          />
-        ))}
-      </div>
     </div>
   );
 }
 
 export default function Hero() {
-  const { hero } = content;
+  const { hero, brand } = content;
   const contentRef = useRef<HTMLDivElement>(null);
   const revealRef = useRef<HTMLDivElement>(null);
 
@@ -194,7 +138,7 @@ export default function Hero() {
       </Parallax>
 
       {/* Base content */}
-      <HeroInner hero={hero} innerRef={contentRef} />
+      <HeroInner hero={hero} brand={brand} innerRef={contentRef} />
 
       {/* Recoloured reveal, shown only inside the cursor mask (see .hero-reveal) */}
       <div
@@ -203,7 +147,7 @@ export default function Hero() {
         inert
         className="hero-reveal pointer-events-none absolute inset-0 z-[1] flex flex-col justify-center pt-[calc(var(--nav-h)+2rem)] pb-20 [&_*]:!text-[var(--color-background)]"
       >
-        <HeroInner hero={hero} reveal />
+        <HeroInner hero={hero} brand={brand} reveal />
       </div>
     </section>
   );

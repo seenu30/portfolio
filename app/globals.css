@@ -212,8 +212,8 @@ html.in-hero .custom-cursor-root {
 
 /* Big-type flourish for oversized display headings. */
 .display {
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  letter-spacing: -0.04em;
+  line-height: 0.86;
 }
 
 /* ------------------------------------------------------------------ */

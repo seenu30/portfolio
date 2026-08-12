@@ -1,53 +1,40 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { content } from "@/lib/content";
+import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
   const copy = content;
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
     <>
       <header className="nav-enter fixed inset-x-0 top-0 z-50">
-        <nav
-          aria-label="Primary"
-          className={`transition-colors duration-300 ${
-            scrolled
-              ? "border-b border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-background),transparent_30%)] backdrop-blur-md"
-              : "border-b border-transparent bg-transparent"
-          }`}
-        >
-          <div className="mx-auto flex h-[var(--nav-h)] max-w-6xl items-center justify-between px-5 sm:px-8">
-            {/* Wordmark */}
+        <nav aria-label="Primary" className="bg-transparent">
+          <div className="mx-auto flex max-w-6xl items-start justify-between px-5 pt-6 sm:px-8">
+            {/* Logo mark */}
             <a
               href="#top"
+              aria-label={copy.brand}
               data-cursor
-              className="text-lg font-semibold tracking-tight text-[var(--color-foreground)]"
+              className="block text-[var(--color-foreground)] transition-colors duration-200 hover:text-[var(--color-accent-2)]"
             >
-              {copy.brand}
+              <Logo />
             </a>
 
             {/* Right group — links pushed right (logo pins left), then mobile toggle */}
-            <div className="flex items-center gap-9">
-              {/* Desktop links with a roll-up duplicate-text hover */}
-              <ul className="hidden items-center gap-9 md:flex">
+            <div className="flex flex-col items-end gap-2">
+              {/* Desktop links (vertical column) with a roll-up duplicate-text hover */}
+              <ul className="hidden flex-col items-end gap-1 md:flex">
                 {copy.nav.links.map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
                       data-cursor
-                      className="group relative block rounded-sm text-sm text-[var(--color-subtle)] transition-colors hover:text-[var(--color-bright)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]"
+                      className="group relative block rounded-sm text-xs font-semibold uppercase tracking-wide text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]"
                     >
                       <span className="relative block h-[1.25em] overflow-hidden">
                         <span className="block transition-transform duration-300 ease-out group-hover:-translate-y-full">

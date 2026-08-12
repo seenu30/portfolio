@@ -35,7 +35,7 @@ export default function Services() {
 
   return (
     <section id="services" data-cursor="expand" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-4xl px-5 sm:px-8">
         <SectionHeading kicker={services.kicker} title={services.title} />
 
         <div className="mt-14 border-t border-[var(--color-border)]">
@@ -43,17 +43,19 @@ export default function Services() {
             <Reveal key={item.label} delay={i * 0.05}>
               <div
                 data-cursor
-                className="group grid grid-cols-1 gap-3 border-b border-[var(--color-border)] py-8 transition-colors duration-300 sm:grid-cols-[7rem_1fr_auto] sm:items-baseline sm:gap-8 sm:rounded-2xl sm:px-4 sm:hover:bg-[var(--color-surface)]"
+                className="group grid grid-cols-1 gap-2 border-b border-[var(--color-border)] py-7 transition-colors duration-300 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8 sm:rounded-2xl sm:px-4 sm:hover:bg-[var(--color-surface)]"
               >
-                <h3 className="text-2xl font-semibold tracking-tight text-[var(--color-foreground)] transition-[color,transform] duration-300 sm:group-hover:translate-x-2 sm:group-hover:text-[var(--color-bright)]">
-                  {item.label}
-                </h3>
-                <p className="max-w-xl text-[var(--color-subtle)] transition-colors duration-300 sm:group-hover:text-[var(--color-bright)]">
+                <div className="flex items-baseline gap-4">
+                  <span className="text-sm tabular-nums text-[var(--color-muted)] transition-colors duration-300 sm:group-hover:text-[var(--color-accent-2)]">
+                    0{i + 1}
+                  </span>
+                  <h3 className="display text-5xl font-bold uppercase text-[var(--color-foreground)] transition-[color,transform] duration-300 sm:text-7xl lg:text-[6rem] sm:group-hover:translate-x-2 sm:group-hover:text-[var(--color-bright)]">
+                    {item.label}
+                  </h3>
+                </div>
+                <p className="max-w-md text-[var(--color-subtle)] transition-all duration-300 sm:translate-y-1 sm:justify-self-end sm:text-right sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:text-[var(--color-bright)] sm:group-hover:opacity-100">
                   {item.desc}
                 </p>
-                <span className="hidden text-sm tabular-nums text-[var(--color-muted)] transition-colors duration-300 sm:block sm:group-hover:text-[var(--color-accent-2)]">
-                  0{i + 1}
-                </span>
               </div>
             </Reveal>
           ))}

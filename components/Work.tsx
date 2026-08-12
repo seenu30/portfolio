@@ -7,7 +7,7 @@ export default function Work() {
 
   return (
     <section id="work" data-cursor="expand" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-4xl px-5 sm:px-8">
         <SectionHeading kicker={work.kicker} title={work.title} />
 
         <div className="mt-14 border-t border-[var(--color-border)]">
@@ -21,7 +21,7 @@ export default function Work() {
                   <span className="text-sm tabular-nums text-[var(--color-muted)] transition-colors duration-300 sm:group-hover:text-[var(--color-bright)]">
                     0{i + 1}
                   </span>
-                  <h3 className="text-3xl font-semibold tracking-tight text-[var(--color-foreground)] transition-[color,transform] duration-300 sm:text-4xl sm:group-hover:translate-x-2 sm:group-hover:text-[var(--color-bright)]">
+                  <h3 className="display text-5xl font-bold uppercase text-[var(--color-foreground)] transition-[color,transform] duration-300 sm:text-7xl lg:text-[6rem] sm:group-hover:translate-x-2 sm:group-hover:text-[var(--color-bright)]">
                     {p.name}
                   </h3>
                 </div>

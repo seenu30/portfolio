@@ -12,7 +12,7 @@ export default function SectionHeading({
 }) {
   return (
     <Reveal className={`max-w-3xl ${className}`}>
-      <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-accent-2)]">
+      <p className="text-sm font-bold uppercase tracking-[0.5em] text-[var(--color-foreground)]">
         {kicker}
       </p>
       <h2 className="display mt-4 text-4xl font-semibold sm:text-5xl lg:text-6xl">

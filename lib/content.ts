@@ -27,6 +27,7 @@ export interface SiteCopy {
     secondaryCta: NavLink;
     stats: Stat[];
   };
+  about: { kicker: string; statement: HeadlineSegment[] };
   services: { kicker: string; title: string; items: Service[] };
   experience: { kicker: string; title: string; jobs: Job[] };
   work: { kicker: string; title: string; projects: Project[] };
@@ -49,9 +50,11 @@ const NAV_LINKS: NavLink[] = [
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
-const NAME_HEADLINE: HeadlineSegment[] = [
-  { text: "Alex", emphasis: false },
-  { text: "Quinn", emphasis: true },
+// Big hero statement — two-ish words emphasized (rendered in the accent).
+const HERO_HEADLINE: HeadlineSegment[] = [
+  { text: "Designing with", emphasis: false },
+  { text: "intent", emphasis: true },
+  { text: "since 2015", emphasis: false },
 ];
 
 export const content: SiteCopy = {
@@ -59,7 +62,7 @@ export const content: SiteCopy = {
   nav: { links: NAV_LINKS },
   hero: {
     badge: "Available for new work",
-    headline: NAME_HEADLINE,
+    headline: HERO_HEADLINE,
     tagline: "Designing with intent since 2015",
     intro:
       "A product designer crafting high-quality, impactful digital experiences for teams who sweat the details.",
@@ -69,6 +72,14 @@ export const content: SiteCopy = {
       { value: 9, suffix: "+", label: "Years designing" },
       { value: 40, suffix: "+", label: "Projects shipped" },
       { value: 30, suffix: "+", label: "Happy clients" },
+    ],
+  },
+  about: {
+    kicker: "About me",
+    statement: [
+      { text: "A product designer with a strong focus on", emphasis: false },
+      { text: "high-quality, impactful", emphasis: true },
+      { text: "digital experiences for teams who sweat the details.", emphasis: false },
     ],
   },
   services: {
