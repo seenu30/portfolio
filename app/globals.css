@@ -177,6 +177,12 @@ body {
   mask-repeat: no-repeat;
 }
 
+/* Over the hero, hide the small ember follower so there's ONE circle — the reveal
+   circle grows from small to large. The native pointer stays visible regardless. */
+html.in-hero .custom-cursor-root {
+  opacity: 0;
+}
+
 /* Soft decorative gradient blob. */
 .orb {
   border-radius: 9999px;
