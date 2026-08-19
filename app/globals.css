@@ -7,14 +7,15 @@
   /* ── palette primitives — EDIT HERE to retheme the whole site ──────────
      Every semantic token below derives from these. Change a value here and
      it cascades everywhere (badges, cursor, borders, hovers, reveal, orb…). */
-  --paper: #0d0d0d; /* near-black base */
+  --paper: #f7eae0; /* soft cream base */
   --paper-2: #17140f; /* raised warm-dark surface */
-  --sand: #b7ab98; /* warm tan — primary text (≈9.3:1 on paper) */
+  --sand: #0d0d0d; /* near-black — primary text */
   --sand-2: #9a8f7d; /* body copy (≈6.7:1, AA) */
   --sand-dim: #847c6d; /* muted labels (≈4.6:1, AA) */
   --bright: #efefef; /* near-white — hi-emphasis / hover */
-  --ember: #eb5939; /* red-orange — the one bold accent (≈4.6:1) */
+  --ember: #2c5745; /* deep green — the one bold accent */
   --ash: #4d4d4d; /* neutral dim grey — the reference's corner control label */
+  --stone: #6b5844; /* dark taupe (darkened cream) — inactive nav-link colour */
 
   --nav-h: 4.5rem;
 }
@@ -30,6 +31,7 @@
   --color-bright: var(--bright); /* hover / hi-emphasis / reveal text */
   --color-muted: var(--sand-dim); /* small secondary labels */
   --color-faint: var(--ash); /* faint corner control (bottom-right CTA), matches ref */
+  --color-nav-inactive: var(--stone); /* inactive nav-link colour */
   --color-subtle: var(--sand-2); /* body copy */
   --color-border: color-mix(in oklab, var(--sand), transparent 88%);
   --color-border-strong: color-mix(in oklab, var(--sand), transparent 80%);
@@ -160,8 +162,8 @@ body {
 /* Maximalist extras — cursor, orbs, rotating text ring                */
 /* ------------------------------------------------------------------ */
 
-/* Hero "reveal" layer — a recoloured duplicate of the hero text, shown only inside
-   a soft circle that follows (with lerp) the pointer. Vars --hero-x/y/r are set by JS. */
+/* Hero/About "reveal" layer — a recoloured duplicate of the text, shown only inside
+   a circle that follows the pointer (JS rAF lerps --hero-x/y/r). */
 .hero-reveal {
   background: var(--color-accent-2);
   /* solid, hard-edged circle (no soft gradient falloff) */
@@ -179,9 +181,9 @@ body {
   mask-repeat: no-repeat;
 }
 
-/* Over the hero, hide the small ember follower so there's ONE circle — the reveal
-   circle grows from small to large. The native pointer stays visible regardless. */
-html.in-hero .custom-cursor-root {
+/* Over a reveal region, hide the small ember follower so there's ONE circle — the
+   reveal circle grows from small to large. The native pointer stays visible. */
+html.reveal-active .custom-cursor-root {
   opacity: 0;
 }
 

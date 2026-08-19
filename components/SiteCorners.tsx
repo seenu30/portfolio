@@ -67,24 +67,24 @@ export default function SiteCorners() {
         <ExternalLink
           href={hero.primaryCta.href}
           data-cursor
-          className="group block rotate-180 text-sm font-bold uppercase tracking-[0.2em] [writing-mode:vertical-rl] [text-orientation:sideways]"
+          className="group block rotate-180 text-sm font-bold uppercase tracking-wide [writing-mode:vertical-rl] [text-orientation:sideways]"
         >
-          {/* Horizontal roll on hover: the copy that rolls in swaps the two words'
-              colours — the lead takes "talk"'s tan and "talk" takes the lead's grey. */}
+          {/* Horizontal roll on hover: the rolled-in (back) copy inverts the two
+              colours — lead↔green, "talk"↔nav-inactive. */}
           <span className="relative block overflow-hidden">
             <span className="block transition-transform duration-300 ease-out group-hover:-translate-x-full">
-              <span className="text-[var(--color-faint)]">{ctaLead}</span>
+              <span className="text-[var(--color-nav-inactive)]">{ctaLead}</span>
               {ctaRest ? (
-                <span className="text-[var(--color-foreground)]"> {ctaRest}</span>
+                <span className="text-[var(--color-accent-2)]"> {ctaRest}</span>
               ) : null}
             </span>
             <span
               aria-hidden="true"
               className="absolute inset-0 block translate-x-full transition-transform duration-300 ease-out group-hover:translate-x-0"
             >
-              <span className="text-[var(--color-foreground)]">{ctaLead}</span>
+              <span className="text-[var(--color-accent-2)]">{ctaLead}</span>
               {ctaRest ? (
-                <span className="text-[var(--color-faint)]"> {ctaRest}</span>
+                <span className="text-[var(--color-nav-inactive)]"> {ctaRest}</span>
               ) : null}
             </span>
           </span>

@@ -86,13 +86,12 @@ export default function Navbar() {
                       aria-current={active ? "true" : undefined}
                       className="group relative block rounded-sm text-sm font-bold uppercase tracking-wide text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]"
                     >
-                      {/* Reference behaviour: same tan hue, two stacked copies — the front copy
-                          is dimmed (50% opacity), the back copy full. Inactive shows the dim
-                          copy; on hover/active it rolls to reveal the full-opacity copy, so the
-                          ACTIVE section's link reads brighter without any colour change. */}
+                      {/* Two stacked copies: the front (inactive) copy uses the
+                          nav-inactive colour; on hover/active it rolls up to reveal the
+                          back copy in the full foreground colour. */}
                       <span className="relative block h-[1.25em] overflow-hidden">
                         <span
-                          className={`block opacity-50 transition-transform duration-300 ease-out group-hover:-translate-y-full ${
+                          className={`block text-[var(--color-nav-inactive)] transition-transform duration-300 ease-out group-hover:-translate-y-full ${
                             active ? "-translate-y-full" : ""
                           }`}
                         >
