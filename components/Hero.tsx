@@ -30,7 +30,7 @@ function HeroInner({
   return (
     <div
       ref={innerRef}
-      className="mx-auto flex w-full max-w-2xl flex-col items-center px-5 text-center sm:px-8"
+      className="mx-auto flex w-full max-w-[33.6rem] flex-col items-center px-5 text-center sm:px-8"
     >
       {/* Eyebrow name */}
       <p

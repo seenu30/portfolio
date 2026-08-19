@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { content } from "@/lib/content";
-import Logo from "./Logo";
 import Magnetic from "./Magnetic";
 import MobileMenu from "./MobileMenu";
 
@@ -51,15 +50,25 @@ export default function Navbar() {
       <header className="nav-enter fixed inset-x-0 top-0 z-50">
         <nav aria-label="Primary" className="bg-transparent">
           <div className="flex w-full items-start justify-between px-6 pt-6">
-            {/* Logo mark — magnetic pull; a tan circle fills behind it on hover, icon inverts */}
-            <Magnetic strength={0.55} radius={130}>
+            {/* Logo mark — magnetic pull (same range as the social icons); an ember
+                circle fills behind it on hover */}
+            <Magnetic strength={0.55} radius={30}>
               <a
                 href="#top"
                 aria-label={copy.brand}
                 data-cursor
-                className="grid place-items-center rounded-full p-2 text-[var(--color-foreground)] transition-colors duration-300 group-data-[active=true]/mag:bg-[var(--color-accent-2)] group-data-[active=true]/mag:text-[var(--color-on-accent-2)]"
+                className="grid place-items-center rounded-full p-2.5 text-[var(--color-foreground)] transition-colors duration-300 group-data-[active=true]/mag:bg-[var(--color-accent-2)] group-data-[active=true]/mag:text-[var(--color-on-accent-2)]"
               >
-                <Logo className="h-[18px] w-[18px]" />
+                {/* Fixed 18px box (matches the social-icon svg) so the anchor/hover
+                    circle is the same 38px. U+FE0E forces monochrome (text)
+                    presentation so the glyph takes the CSS colour; the larger
+                    font-size makes the horns fill the box like a full 18px icon. */}
+                <span
+                  aria-hidden="true"
+                  className="grid h-[18px] w-[18px] place-items-center text-[22px] leading-none"
+                >
+                  {"🤘︎"}
+                </span>
               </a>
             </Magnetic>
 
