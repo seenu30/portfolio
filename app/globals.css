@@ -215,14 +215,26 @@ html.lenis body {
 }
 
 /* When the custom follower is active (fine pointer, motion allowed), pin the
-   native cursor to the default arrow everywhere so it never flips to a text I-beam
-   over copy or a hand over links — the arrow stays, the follower rides along.
-   Touch / reduced-motion never get the class, so they keep normal system cursors. */
+   native cursor to the default arrow over copy so it never flips to a text I-beam —
+   the arrow stays, the follower rides along. Touch / reduced-motion never get the
+   class, so they keep normal system cursors. */
 html.has-custom-cursor,
 html.has-custom-cursor *,
 html.has-custom-cursor *::before,
 html.has-custom-cursor *::after {
   cursor: default !important;
+}
+
+/* …but interactive elements keep the hand pointer, like the reference site (its
+   nav links, logo and social icons all compute cursor: pointer). */
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor [role="button"],
+html.has-custom-cursor label[for],
+html.has-custom-cursor a *,
+html.has-custom-cursor button *,
+html.has-custom-cursor [role="button"] * {
+  cursor: pointer !important;
 }
 
 /* Over a reveal region, hide the small ember follower so there's ONE circle — the
