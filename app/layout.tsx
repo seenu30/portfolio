@@ -4,6 +4,7 @@ import { content } from "@/lib/content";
 import Preloader from "@/components/Preloader";
 import CustomCursor from "@/components/CustomCursor";
 import SiteCorners from "@/components/SiteCorners";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 // Base UI/body face.
@@ -46,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${lora.variable}`}>
       <body>
+        <SmoothScroll />
         <Preloader />
         <CustomCursor />
         {children}

@@ -14,7 +14,9 @@ import { type RefObject, useEffect } from "react";
 export function useRevealCircle(
   target: RefObject<HTMLElement | null>,
   layer: RefObject<HTMLElement | null>,
+  options?: { activeSelector?: string },
 ) {
+  const activeSelector = options?.activeSelector;
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -31,27 +33,43 @@ export function useRevealCircle(
     let cx = 0,
       cy = 0,
       cr = 0; // current
+    let on = false;
 
     const rel = (e: PointerEvent) => {
       const r = lyr.getBoundingClientRect();
       return { x: e.clientX - r.left, y: e.clientY - r.top };
     };
+    // With an activeSelector the circle only shows while the pointer is over a
+    // matching element (the text), not the whole target container.
+    const overActive = (e: PointerEvent) =>
+      !activeSelector ||
+      (e.target instanceof Element && !!e.target.closest(activeSelector));
+    const grow = (p: { x: number; y: number }) => {
+      if (!on) {
+        on = true;
+        cx = tx = p.x;
+        cy = ty = p.y; // jump centre to pointer so it doesn't sweep in from 0,0
+      }
+      tr = 150;
+      document.documentElement.classList.add("reveal-active");
+    };
+    const shrink = () => {
+      on = false;
+      tr = 0;
+      document.documentElement.classList.remove("reveal-active");
+    };
+
     const onMove = (e: PointerEvent) => {
       const p = rel(e);
       tx = p.x;
       ty = p.y;
+      if (overActive(e)) grow(p);
+      else shrink();
     };
     const onEnter = (e: PointerEvent) => {
-      const p = rel(e);
-      cx = tx = p.x;
-      cy = ty = p.y; // jump centre to pointer so it doesn't sweep in from 0,0
-      tr = 150;
-      document.documentElement.classList.add("reveal-active");
+      if (overActive(e)) grow(rel(e));
     };
-    const onLeave = () => {
-      tr = 0;
-      document.documentElement.classList.remove("reveal-active");
-    };
+    const onLeave = () => shrink();
 
     el.addEventListener("pointermove", onMove);
     el.addEventListener("pointerenter", onEnter);
@@ -75,5 +93,5 @@ export function useRevealCircle(
       el.removeEventListener("pointerleave", onLeave);
       document.documentElement.classList.remove("reveal-active");
     };
-  }, [target, layer]);
+  }, [target, layer, activeSelector]);
 }

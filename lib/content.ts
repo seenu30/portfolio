@@ -84,7 +84,7 @@ export const content: SiteCopy = {
   },
   services: {
     kicker: "What I do",
-    title: "Design that ships, not just slides",
+    title: "",
     items: [
       {
         label: "Product",

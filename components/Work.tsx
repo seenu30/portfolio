@@ -9,14 +9,17 @@ export default function Work() {
     <section id="work" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-2xl px-5 sm:px-8">
         <SectionHeading kicker={work.kicker} title={work.title} />
+      </div>
 
-        <div className="mt-14 border-t border-[var(--color-border)]">
-          {work.projects.map((p, i) => (
-            <Reveal key={p.name} delay={i * 0.04}>
-              <div
-                data-cursor="view"
-                className="group grid grid-cols-1 gap-2 border-b border-[var(--color-border)] py-7 transition-colors duration-300 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-6"
-              >
+      {/* Full-bleed dividers; each row's content stays centred in the same column. */}
+      <div className="full-bleed mt-14 border-t border-[var(--color-border)]">
+        {work.projects.map((p, i) => (
+          <Reveal key={p.name} delay={i * 0.04}>
+            <div
+              data-cursor="view"
+              className="group border-b border-[var(--color-border)] transition-colors duration-300"
+            >
+              <div className="mx-auto grid max-w-2xl grid-cols-1 gap-2 px-5 py-7 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-6 sm:px-8">
                 <div className="flex items-baseline gap-4">
                   <span className="text-sm tabular-nums text-[var(--color-muted)] transition-colors duration-300 sm:group-hover:text-[var(--color-bright)]">
                     0{i + 1}
@@ -32,9 +35,9 @@ export default function Work() {
                   {p.tag}
                 </span>
               </div>
-            </Reveal>
-          ))}
-        </div>
+            </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );

@@ -7,7 +7,7 @@ export default function SectionHeading({
   className = "",
 }: {
   kicker: string;
-  title: string;
+  title?: string;
   className?: string;
 }) {
   return (
@@ -15,9 +15,11 @@ export default function SectionHeading({
       <p className="text-sm font-bold uppercase tracking-[0.5em] text-[var(--color-foreground)]">
         {kicker}
       </p>
-      <h2 className="display mt-4 text-4xl font-semibold sm:text-5xl lg:text-6xl">
-        {title}
-      </h2>
+      {title ? (
+        <h2 className="display mt-4 text-4xl font-semibold sm:text-5xl lg:text-6xl">
+          {title}
+        </h2>
+      ) : null}
     </Reveal>
   );
 }

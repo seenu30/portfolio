@@ -69,8 +69,8 @@ export default function SiteCorners() {
           data-cursor
           className="group block rotate-180 text-sm font-bold uppercase tracking-wide [writing-mode:vertical-rl] [text-orientation:sideways]"
         >
-          {/* Horizontal roll on hover: the rolled-in (back) copy inverts the two
-              colours — lead↔green, "talk"↔nav-inactive. */}
+          {/* Horizontal roll on hover: "lets" stays the inactive-nav colour in both
+              copies; only "talk" changes — green at rest → nav-inactive on hover. */}
           <span className="relative block overflow-hidden">
             <span className="block transition-transform duration-300 ease-out group-hover:-translate-x-full">
               <span className="text-[var(--color-nav-inactive)]">{ctaLead}</span>
@@ -82,7 +82,7 @@ export default function SiteCorners() {
               aria-hidden="true"
               className="absolute inset-0 block translate-x-full transition-transform duration-300 ease-out group-hover:translate-x-0"
             >
-              <span className="text-[var(--color-accent-2)]">{ctaLead}</span>
+              <span className="text-[var(--color-nav-inactive)]">{ctaLead}</span>
               {ctaRest ? (
                 <span className="text-[var(--color-nav-inactive)]"> {ctaRest}</span>
               ) : null}

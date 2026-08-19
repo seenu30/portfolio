@@ -41,13 +41,10 @@ export default function Services() {
 
       {/* Full-bleed list: dividers span the page width; each row's content stays
           centred in the same max-w-2xl column as the heading. */}
-      <div className="mt-14 border-t border-[var(--color-border)]">
+      <div className="full-bleed mt-6 border-t border-[var(--color-border)]">
         {services.items.map((item, i) => (
           <Reveal key={item.label} delay={i * 0.05}>
-            <div
-              data-cursor
-              className="group relative overflow-hidden border-b border-[var(--color-border)]"
-            >
+            <div className="group relative overflow-hidden border-b border-[var(--color-border)]">
               {/* Green panel that reveals from the centre line, filling up + down. */}
               <span
                 aria-hidden="true"
@@ -71,7 +68,7 @@ export default function Services() {
         ))}
       </div>
 
-      <div className="mt-16 border-y border-[var(--color-border)] py-5">
+      <div className="full-bleed mt-16 border-y border-[var(--color-border)] py-5">
         <Marquee items={TOOLS} duration={28} />
       </div>
     </section>

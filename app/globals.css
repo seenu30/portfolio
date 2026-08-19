@@ -49,6 +49,9 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* clip the ~scrollbar-width overflow from 100vw full-bleed rules (overflow-x:
+     clip, not hidden, so position: sticky keeps working) */
+  overflow-x: clip;
   /* dark canvas from the very first paint, before body styles resolve */
   background: var(--color-background);
 }
@@ -59,6 +62,36 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Full-bleed: break an element out of the page frame to span the whole viewport
+   width (used for the horizontal separator rules while content stays inset). */
+.full-bleed {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Lenis inertia smooth-scroll (see components/SmoothScroll.tsx). While active it
+   owns easing, so the native CSS smooth is turned off to avoid double-smoothing. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 /* ------------------------------------------------------------------ */
@@ -181,8 +214,19 @@ body {
   mask-repeat: no-repeat;
 }
 
+/* When the custom follower is active (fine pointer, motion allowed), pin the
+   native cursor to the default arrow everywhere so it never flips to a text I-beam
+   over copy or a hand over links — the arrow stays, the follower rides along.
+   Touch / reduced-motion never get the class, so they keep normal system cursors. */
+html.has-custom-cursor,
+html.has-custom-cursor *,
+html.has-custom-cursor *::before,
+html.has-custom-cursor *::after {
+  cursor: default !important;
+}
+
 /* Over a reveal region, hide the small ember follower so there's ONE circle — the
-   reveal circle grows from small to large. The native pointer stays visible. */
+   reveal circle grows from small to large (native cursor is already hidden). */
 html.reveal-active .custom-cursor-root {
   opacity: 0;
 }
