@@ -65,25 +65,37 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden pt-[calc(var(--nav-h)+2rem)] pb-20"
+      className="relative flex min-h-screen flex-col justify-center pt-[calc(var(--nav-h)+2rem)] pb-20"
     >
-      {/* Decorative parallax orb behind the name */}
-      <Parallax
-        amount={16}
-        className="pointer-events-none absolute inset-x-0 top-1/3 -z-10 flex justify-center"
-      >
-        <div className="orb h-[34rem] w-[34rem] opacity-70" />
-      </Parallax>
+      {/* Decorative parallax orb behind the name — its own overflow-hidden clip so the
+          blur stays contained WITHOUT clipping the full-bleed reveal layer below. */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <Parallax
+          amount={16}
+          className="absolute inset-x-0 top-1/3 flex justify-center"
+        >
+          <div className="orb h-[34rem] w-[34rem] opacity-70" />
+        </Parallax>
+      </div>
 
       {/* Base content */}
       <HeroInner hero={hero} brand={brand} innerRef={contentRef} />
 
-      {/* Recoloured reveal, shown only inside the cursor mask (see .hero-reveal) */}
+      {/* Recoloured reveal, shown only inside the cursor mask (see .hero-reveal).
+          Spans the full viewport width (left/right -50vw + matching padding) so the
+          reveal circle is never clipped at the page-frame gutter on the left/right;
+          the 50vw padding puts the inner content back over the base copy. */}
       <div
         ref={revealRef}
         aria-hidden="true"
         inert
-        className="hero-reveal pointer-events-none absolute inset-0 z-[1] flex flex-col justify-center pt-[calc(var(--nav-h)+2rem)] pb-20 [&_*]:!text-[var(--color-background)]"
+        className="hero-reveal pointer-events-none absolute inset-y-0 z-[1] flex flex-col justify-center pt-[calc(var(--nav-h)+2rem)] pb-20 [&_*]:!text-[var(--color-background)]"
+        style={{
+          left: "-50vw",
+          right: "-50vw",
+          paddingLeft: "50vw",
+          paddingRight: "50vw",
+        }}
       >
         <HeroInner hero={hero} brand={brand} reveal />
       </div>

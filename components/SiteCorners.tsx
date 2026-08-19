@@ -60,17 +60,18 @@ export default function SiteCorners() {
       </ul>
 
       {/* Bottom-right — vertical "Let's talk" (in place of the reference's sound toggle).
-          Colours match that control: dim grey at rest → tan on hover. text-orientation:
-          sideways rotates every glyph uniformly; rotate-180 turns the vertical-rl rotate(90°)
-          into rotate(270°) ≡ rotate(-90°) so it reads bottom-to-top like the reference. */}
+          text-orientation: sideways rotates every glyph uniformly; rotate-180 turns the
+          vertical-rl rotate(90°) into rotate(270°) ≡ rotate(-90°) so it reads bottom-to-top
+          like the reference. */}
       <div className="fixed bottom-6 right-6 z-40 hidden md:block">
         <ExternalLink
           href={hero.primaryCta.href}
           data-cursor
           className="group block rotate-180 text-sm font-bold uppercase tracking-wide [writing-mode:vertical-rl] [text-orientation:sideways]"
         >
-          {/* Horizontal roll on hover: "lets" stays the inactive-nav colour in both
-              copies; only "talk" changes — green at rest → nav-inactive on hover. */}
+          {/* Horizontal roll on hover: the front copy has "talk" green; the back copy
+              (revealed on hover) swaps the green onto "lets" (#2C5745 = accent-2) while
+              "talk" drops to the inactive-nav colour. */}
           <span className="relative block overflow-hidden">
             <span className="block transition-transform duration-300 ease-out group-hover:-translate-x-full">
               <span className="text-[var(--color-nav-inactive)]">{ctaLead}</span>
@@ -82,7 +83,7 @@ export default function SiteCorners() {
               aria-hidden="true"
               className="absolute inset-0 block translate-x-full transition-transform duration-300 ease-out group-hover:translate-x-0"
             >
-              <span className="text-[var(--color-nav-inactive)]">{ctaLead}</span>
+              <span className="text-[var(--color-accent-2)]">{ctaLead}</span>
               {ctaRest ? (
                 <span className="text-[var(--color-nav-inactive)]"> {ctaRest}</span>
               ) : null}

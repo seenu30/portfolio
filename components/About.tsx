@@ -126,12 +126,21 @@ export default function About() {
         </Reveal>
       </div>
 
-      {/* Recoloured reveal, shown only inside the cursor mask (see .hero-reveal) */}
+      {/* Recoloured reveal, shown only inside the cursor mask (see .hero-reveal).
+          Spans the full viewport width (left/right -50vw + matching padding) so the
+          reveal circle is never clipped at the page-frame gutter on the left/right;
+          the 50vw padding puts the inner content back over the base copy. */}
       <div
         ref={revealRef}
         aria-hidden="true"
         inert
-        className="hero-reveal pointer-events-none absolute inset-0 z-[1] py-24 sm:py-32 [&_*]:!text-[var(--color-background)]"
+        className="hero-reveal pointer-events-none absolute inset-y-0 z-[1] py-24 sm:py-32 [&_*]:!text-[var(--color-background)]"
+        style={{
+          left: "-50vw",
+          right: "-50vw",
+          paddingLeft: "50vw",
+          paddingRight: "50vw",
+        }}
       >
         <div className="mx-auto max-w-2xl px-5 sm:px-8">
           <Kicker text={about.kicker} />
