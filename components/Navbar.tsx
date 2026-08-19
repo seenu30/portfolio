@@ -47,12 +47,17 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="nav-enter fixed inset-x-0 top-0 z-50">
+      {/* Fixed full-width bar, but pointer-transparent (like the reference header,
+          which is a 0-height fixed bar): the empty strip between/around the logo and
+          nav must NOT intercept hover/clicks, or it would sit over the top of the
+          page content and swallow the reveal-circle hover + link clicks there. Only
+          the actual interactive children (logo, nav group) re-enable pointer events. */}
+      <header className="nav-enter pointer-events-none fixed inset-x-0 top-0 z-50">
         <nav aria-label="Primary" className="bg-transparent">
           <div className="flex w-full items-start justify-between px-6 pt-6">
             {/* Logo mark — magnetic pull (same range as the social icons); an ember
                 circle fills behind it on hover */}
-            <Magnetic strength={0.55} radius={30}>
+            <Magnetic className="pointer-events-auto" strength={0.55} radius={30}>
               <a
                 href="#top"
                 aria-label={copy.brand}
@@ -73,7 +78,7 @@ export default function Navbar() {
             </Magnetic>
 
             {/* Right group — links pushed right (logo pins left), then mobile toggle */}
-            <div className="flex flex-col items-end gap-2">
+            <div className="pointer-events-auto flex flex-col items-end gap-2">
               {/* Desktop links (vertical column) with a roll-up duplicate-text hover */}
               <ul className="hidden flex-col items-end gap-1 md:flex">
                 {copy.nav.links.map((link) => {

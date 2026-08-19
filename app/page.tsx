@@ -15,7 +15,7 @@ export default function Home() {
       {/* Page frame — content sits between the fixed corner rails (logo/socials on
           the left, nav/Let's-talk on the right) on desktop; rule lines break out
           full-bleed. Mobile has no corners, so no gutter. */}
-      <main className="md:px-28 lg:px-32">
+      <main className="isolate md:px-28 lg:px-32">
         <Hero />
         <About />
         <Services />
