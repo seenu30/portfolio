@@ -14,9 +14,14 @@ export default function SmoothScroll() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
-      // easeOutExpo — quick take-off, long glide to a stop (the reference feel).
-      easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
+      // Lerp-based smoothing: each frame eases a fixed fraction of the remaining
+      // distance, so it's continuous and even (smoother than a long easeOutExpo
+      // tail). A low lerp gives a heavier, longer glide, and wheelMultiplier < 1
+      // shortens the travel per tick — together a slow, buttery scroll.
+      lerp: 0.05, // lower = smoother/heavier glide (0.1 is Lenis default)
+      wheelMultiplier: 0.35, // < 1 = slower travel per wheel notch (the main "slow" knob)
+      smoothWheel: true,
+      touchMultiplier: 1,
     });
 
     let raf = 0;
