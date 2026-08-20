@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#0d0d0d" />
-  <path d="M20 44V20h4.6l14.8 16.4V20H44v24h-4.6L24.6 27.6V44H20z" fill="#eb5939" />
+  <!-- Cream circle background (the page background colour #F7EAE0). -->
+  <circle cx="32" cy="32" r="32" fill="#F7EAE0" />
+  <!-- The same horns glyph as the navbar brand: U+1F918 + U+FE0E (variation
+       selector forces monochrome/text presentation so it takes the fill colour).
+       Centred with text-anchor + dominant-baseline both at the circle centre. -->
+  <text x="32" y="41" text-anchor="middle" dominant-baseline="central"
+        font-size="48.6" fill="#0d0d0d">🤘︎</text>
 </svg>
