@@ -31,13 +31,20 @@ export interface SiteCopy {
   services: { kicker: string; title: string; items: Service[] };
   experience: { kicker: string; title: string; jobs: Job[] };
   work: { kicker: string; title: string; projects: Project[] };
-  philosophy: { quote: string; author: string };
+  philosophy: {
+    quote: string;
+    author: string;
+    wittyQuote: string;
+    wittyAuthor: string;
+  };
   testimonials: { kicker: string; title: string; items: Testimonial[] };
   contact: {
     kicker: string;
     title: string;
     email: string;
+    emailNote: string;
     phone: string;
+    phoneNote: string;
     socials: Social[];
   };
 }
@@ -125,7 +132,12 @@ export const content: SiteCopy = {
       { name: "Terra", tag: "Climate", desc: "Data viz and marketing site for a climate startup." },
     ],
   },
-  philosophy: { quote: "Good design is honest.", author: "Dieter Rams" },
+  philosophy: {
+    quote: "Good design is honest.",
+    author: "Dieter Rams",
+    wittyQuote: "Good design is honest. Mine's working on it.",
+    wittyAuthor: "Alex Quinn",
+  },
   testimonials: {
     kicker: "What they said",
     title: "Kind words from good people",
@@ -152,7 +164,9 @@ export const content: SiteCopy = {
     kicker: "Contact",
     title: "Let’s build something",
     email: EMAIL,
+    emailNote: "I actually read these",
     phone: PHONE,
+    phoneNote: "Text first, please",
     socials: [
       { label: "Dribbble", href: "https://dribbble.com/", note: "Selected shots" },
       { label: "YouTube", href: "https://youtube.com/", note: "Process & tips" },

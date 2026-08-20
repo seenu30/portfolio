@@ -7,7 +7,7 @@ export default function Work() {
 
   return (
     <section id="work" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-2xl px-5 sm:px-8">
+      <div className="px-5 sm:px-8">
         <SectionHeading kicker={work.kicker} title={work.title} />
       </div>
 
@@ -19,7 +19,7 @@ export default function Work() {
               data-cursor="view"
               className="group border-b border-[var(--color-border)] transition-colors duration-300"
             >
-              <div className="mx-auto grid max-w-2xl grid-cols-1 gap-2 px-5 py-7 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-6 sm:px-8">
+              <div className="grid grid-cols-1 gap-2 px-5 py-7 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-6 sm:px-8 md:px-36 lg:px-40">
                 <div className="flex items-baseline gap-4">
                   <span className="text-sm tabular-nums text-[var(--color-muted)] transition-colors duration-300 sm:group-hover:text-[var(--color-bright)]">
                     0{i + 1}

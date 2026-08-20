@@ -119,7 +119,7 @@ export default function About() {
   return (
     <section id="about" className="relative py-24 sm:py-32">
       {/* Base content — statement brightens word by word on scroll */}
-      <div ref={contentRef} className="mx-auto max-w-2xl px-5 sm:px-8">
+      <div ref={contentRef} className="px-5 sm:px-8">
         <Reveal>
           <Kicker text={about.kicker} />
           <Statement words={words} progress={baseProgress} />
@@ -142,7 +142,7 @@ export default function About() {
           paddingRight: "50vw",
         }}
       >
-        <div className="mx-auto max-w-2xl px-5 sm:px-8">
+        <div className="px-5 sm:px-8">
           <Kicker text={about.kicker} />
           <Statement words={words} progress={null} />
         </div>

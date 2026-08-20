@@ -35,7 +35,7 @@ export default function Services() {
 
   return (
     <section id="services" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-2xl px-5 sm:px-8">
+      <div className="px-5 sm:px-8">
         <SectionHeading kicker={services.kicker} title={services.title} />
       </div>
 
@@ -50,7 +50,7 @@ export default function Services() {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 origin-center scale-y-0 bg-[var(--color-accent-2)] transition-transform duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:scale-y-100"
               />
-              <div className="relative mx-auto grid max-w-2xl grid-cols-1 gap-2 px-5 py-7 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8 sm:px-8">
+              <div className="relative grid grid-cols-1 gap-2 px-5 py-7 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8 sm:px-8 md:px-36 lg:px-40">
                 <div className="flex items-baseline gap-4">
                   <span className="text-sm tabular-nums text-[var(--color-muted)] transition-colors duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] sm:group-hover:text-[var(--color-bright)]">
                     0{i + 1}

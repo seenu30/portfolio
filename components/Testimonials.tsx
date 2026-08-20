@@ -188,7 +188,7 @@ export default function Testimonials() {
 
   return (
     <section className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-5xl px-5 sm:px-8">
+      <div className="px-5 sm:px-8">
         {/* Header + divider */}
         <p className="text-sm font-bold uppercase tracking-[0.5em] text-[var(--color-foreground)]">
           {testimonials.kicker}

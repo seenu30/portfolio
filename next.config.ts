@@ -12,7 +12,9 @@ const csp = [
   `script-src 'self'${isDev ? " 'unsafe-eval' 'unsafe-inline'" : ""}`,
   // Next injects a small inline style for streaming; allow inline styles (not scripts).
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  // images.unsplash.com allows the motto section's online placeholder photo;
+  // drop it (or swap the host) once the image is self-hosted under /public.
+  "img-src 'self' data: https://images.unsplash.com",
   "font-src 'self' data:",
   "connect-src 'self'" + (isDev ? " ws:" : ""),
   "frame-ancestors 'none'",
