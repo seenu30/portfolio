@@ -126,7 +126,7 @@ export default function Navbar() {
                 aria-controls="mobile-menu"
                 aria-label={open ? "Close menu" : "Open menu"}
                 data-cursor
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-strong)] text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] md:hidden"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-strong)] text-[var(--color-foreground)] transition-colors hover:border-[var(--color-accent-2)] hover:bg-[var(--color-accent-2)] hover:text-[var(--color-on-accent-2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] md:hidden"
               >
                 <span className="relative block h-4 w-5" aria-hidden="true">
                   <span

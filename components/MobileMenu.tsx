@@ -3,7 +3,6 @@
 import { type RefObject, useEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { content } from "@/lib/content";
-import ExternalLink from "./ExternalLink";
 import HoverButton from "./HoverButton";
 
 type Props = {
@@ -126,32 +125,28 @@ export default function MobileMenu({ open, onClose, triggerRef }: Props) {
                   <a
                     href={link.href}
                     onClick={onClose}
-                    className="block border-b border-[var(--color-border)] py-4 font-serif text-4xl italic tracking-tight text-[var(--color-foreground)]"
+                    className="group relative block overflow-hidden border-b border-[var(--color-border)]"
                   >
-                    {link.label}
+                    {/* Green panel reveals from the centre line (the "What I do" hover). */}
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 origin-center scale-y-0 bg-[var(--color-accent-2)] transition-transform duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:scale-y-100"
+                    />
+                    <span className="display relative block py-5 text-4xl font-semibold text-[var(--color-foreground)] transition-[color,transform] duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:translate-x-2 group-hover:text-[var(--color-bright)]">
+                      {link.label}
+                    </span>
                   </a>
                 </motion.li>
               ))}
             </ul>
 
-            <motion.div variants={itemVariants} className="space-y-7">
+            <motion.div variants={itemVariants}>
               <HoverButton
                 href={copy.hero.primaryCta.href}
                 label={copy.hero.primaryCta.label}
                 variant="primary"
                 className="w-full"
               />
-              <div className="flex flex-wrap gap-x-6 gap-y-2">
-                {copy.contact.socials.map((s) => (
-                  <ExternalLink
-                    key={s.label}
-                    href={s.href}
-                    className="text-sm text-[var(--color-subtle)] transition-colors hover:text-[var(--color-foreground)]"
-                  >
-                    {s.label}
-                  </ExternalLink>
-                ))}
-              </div>
             </motion.div>
           </motion.nav>
         </motion.div>

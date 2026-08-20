@@ -16,7 +16,7 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-accent)] text-[var(--color-on-accent)] hover:bg-[color-mix(in_oklab,var(--color-accent),var(--color-accent-2)_12%)]",
+    "bg-[var(--color-accent-2)] text-[var(--color-on-accent-2)] hover:bg-[color-mix(in_oklab,var(--color-accent-2),#000_14%)]",
   outline:
     "border border-[var(--color-border-strong)] text-[var(--color-foreground)] hover:border-[var(--color-foreground)]",
   ghost:
