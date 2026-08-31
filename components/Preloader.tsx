@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { content } from "@/lib/content";
 
-const SESSION_KEY = "preloaded";
 const DURATION = 1300;
 
 /**
  * Full-screen loading overlay with a 0→100% counter, then it slides away.
- * The page renders underneath (SSR/SEO intact). Shows once per session; skips
+ * The page renders underneath (SSR/SEO intact). Plays on every load; skips
  * instantly under reduced motion. Decorative → aria-hidden.
+ *
+ * The cover can never get stuck: besides the rAF counter, a setTimeout failsafe
+ * always dismisses it (rAF is paused in a backgrounded tab), and a CSS failsafe
+ * (.preloader in globals.css) hides it even if the client JS never hydrates.
  */
 export default function Preloader() {
   const reduced = useReducedMotion();
@@ -19,13 +22,7 @@ export default function Preloader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    let skip = !!reduced;
-    try {
-      if (sessionStorage.getItem(SESSION_KEY)) skip = true;
-    } catch {
-      /* ignore */
-    }
-    if (skip) {
+    if (reduced) {
       setCount(100);
       setVisible(false);
       return;
@@ -40,16 +37,22 @@ export default function Preloader() {
       if (p < 1) {
         raf = requestAnimationFrame(tick);
       } else {
-        try {
-          sessionStorage.setItem(SESSION_KEY, "1");
-        } catch {
-          /* ignore */
-        }
         raf = requestAnimationFrame(() => setVisible(false));
       }
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    // Failsafe: guarantee the cover lifts even if rAF is throttled/paused (e.g.
+    // the tab loads in the background), where the counter would never advance.
+    const failsafe = setTimeout(() => {
+      setCount(100);
+      setVisible(false);
+    }, DURATION + 400);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(failsafe);
+    };
   }, [reduced]);
 
   // Lock scroll while the overlay is up.
@@ -67,7 +70,7 @@ export default function Preloader() {
       {visible && (
         <motion.div
           aria-hidden="true"
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[var(--color-background)]"
+          className="preloader fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[var(--color-background)]"
           initial={{ opacity: 1 }}
           exit={reduced ? { opacity: 0 } : { y: "-100%" }}
           transition={{
